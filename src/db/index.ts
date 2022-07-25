@@ -1,13 +1,19 @@
-import { Sequelize } from 'sequelize';
-import url from './config';
+import { Sequelize } from "sequelize";
 
-const sequelize = new Sequelize(url, {
+const { DB_USERNAME, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME } = process.env;
+
+const sequelize = new Sequelize({
+  dialect: "postgres",
+  host: DB_HOST || "postgres",
+  port: Number(DB_PORT),
+  database: DB_NAME || "postgres",
+  username: DB_USERNAME,
+  password: DB_PASSWORD,
   define: {
     underscored: true,
-
   },
 });
 
 export default {
   sequelize,
-}
+};
