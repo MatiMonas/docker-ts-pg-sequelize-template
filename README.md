@@ -1,9 +1,10 @@
 # docker-ts-pg-sequelize-template
 
 To make use of this template follow the steps below: 
-1. Open Docker Desktop
-2. Run ```yarn dev | npm run dev```
-3. That's it.
+1. Create an .env file following the .env.example
+2. Open Docker Desktop
+3. Run ```yarn dev | npm run dev```
+4. That's it.
 
 ----
 
