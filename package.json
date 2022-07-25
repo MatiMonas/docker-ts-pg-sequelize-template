@@ -7,7 +7,14 @@
     "dev": "docker-compose up --build --quiet-pull",
     "build": "rimraf ./dist && tsc"
   },
-  "keywords": [],
+  "keywords": [
+    "template",
+    "typescript",
+    "docker",
+    "sequelize",
+    "nodejs",
+    "pg"
+  ],
   "author": "@MatiMonas",
   "license": "ISC",
   "dependencies": {
