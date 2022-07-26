@@ -6,12 +6,12 @@ export const errorHandler = (
   _next: NextFunction,
 ): void => {
   const status = err.status || 500;
-  const errors =
-    err.errors && err.errors.length ? err.errors : [{ message: err.message }];
-  if (status >= 500) {
+  const message = err.message || 'Something went wrong';
+
+  res.status(status).json({ message, status });
+  if (status >= 500) {    
     console.error(err);
   } else {
-    console.info({ status, errors });
+    console.info({ message, status });
   }
-  res.status(status).json({ errors });
 };
