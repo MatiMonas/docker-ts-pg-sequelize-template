@@ -43,6 +43,18 @@ export const update = async (
     throw new CustomError('Country not found', 404);
   }
 
+  const checkCountry = await Country.findOne({
+    where: {
+      name: {
+        [Op.eq]: payload.name,
+      },
+    },
+  });
+
+  if (checkCountry) {
+    throw new CustomError('A country with that name already exists', 400);
+  }
+
   const updatedCountry = await country.update(payload);
   return updatedCountry.toJSON() as CountryOutput;
 };
