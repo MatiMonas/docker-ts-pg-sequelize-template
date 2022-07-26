@@ -3,11 +3,13 @@ import { CountryOutput, CountryInput } from '../models/Country.model';
 import * as countryDal from '../dal/country';
 
 export const create = (payload: CountryInput): Promise<CountryOutput> => {
-  const country = countryDal.findOrCreate(payload);
-  return country;
+  return countryDal.create(payload);
 };
 
-export const update = (id: number, payload: CountryInput): Promise<CountryOutput> => {
+export const update = (
+  id: number,
+  payload: Partial<CountryInput>,
+): Promise<CountryOutput> => {
   return countryDal.update(id, payload);
 };
 
@@ -19,6 +21,8 @@ export const deleteById = (id: number): Promise<boolean> => {
   return countryDal.deleteById(id);
 };
 
-export const getAll = (filters: GetAllCountriesFilters): Promise<CountryOutput[]> => {
+export const getAll = (
+  filters: GetAllCountriesFilters,
+): Promise<CountryOutput[]> => {
   return countryDal.getAll(filters);
 };

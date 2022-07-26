@@ -7,7 +7,7 @@ export const create = (payload: UserInput): Promise<UserOutput> => {
   return checkUser;
 };
 
-export const update = (id: number, payload: UserInput): Promise<UserOutput> => {
+export const update = (id: number, payload: Partial<UserInput>): Promise<UserOutput> => {
   return userDal.update(id, payload);
 };
 

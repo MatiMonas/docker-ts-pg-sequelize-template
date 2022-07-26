@@ -23,7 +23,7 @@ export const findOrCreate = async (payload: UserInput): Promise<UserOutput> => {
 
 export const update = async (
   id: number,
-  payload: UserInput,
+  payload: Partial<UserInput>,
 ): Promise<UserOutput> => {
   const user = await User.findByPk(id);
 
