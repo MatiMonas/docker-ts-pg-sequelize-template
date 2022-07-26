@@ -13,8 +13,21 @@ const countryRouter = Router()
       return res.status(200).json(results);
     } catch (err: any) {
       return res
-      .status(err.status)
-      .json({ message: err.message, status: err.status });
+        .status(err.status)
+        .json({ message: err.message, status: err.status });
+    }
+  })
+
+  .get('/:id', async (req: Request, res: Response) => {
+    try {
+      const id: number = Number(req.params.id);
+      const result = await countriesController.getById(id);
+
+      return res.status(200).json(result);
+    } catch (err: any) {
+      return res
+        .status(err.status)
+        .json({ message: err.message, status: err.status });
     }
   })
 
