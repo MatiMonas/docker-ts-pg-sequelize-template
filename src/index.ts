@@ -20,7 +20,7 @@ const getApplication = () => {
       credentials: true,
     }),
   );
-  app.use('/api/', routes);
+  app.use('/api', routes);
   app.use(errorHandler);
 
   return app;
