@@ -43,6 +43,6 @@ const Country = sequelize.define<CountryInstance>(
   },
 );
 
-User?.belongsTo(Country, { foreignKey: 'id' });
+User && User.belongsTo(Country, { foreignKey: 'id' });
 
 export default Country;

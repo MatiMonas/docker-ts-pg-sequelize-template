@@ -56,6 +56,6 @@ const User = sequelize.define<UserInstance>(
   },
 )
 
-Country?.hasMany(User, { foreignKey: 'countryId' });
+Country && Country.hasMany(User, { foreignKey: 'countryId' });
 
 export default User;
