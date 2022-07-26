@@ -11,13 +11,14 @@ export const create = async (payload: CountryInput): Promise<CountryOutput> => {
         [Op.eq]: payload.name,
       },
     },
-  })
-  
-  if(checkCountry) {
+  });
+
+  if (checkCountry) {
     throw new CustomError('Country already exists', 400);
   }
 
-  const country = await Country.create(payload);1
+  const country = await Country.create(payload);
+
   return country.toJSON() as CountryOutput;
 };
 
@@ -51,7 +52,6 @@ export const getById = async (id: number): Promise<CountryOutput> => {
 
   if (!country) {
     throw new CustomError('Country not found', 404);
-
   }
   return country.toJSON() as CountryOutput;
 };
@@ -64,17 +64,20 @@ export const deleteById = async (id: number): Promise<boolean> => {
   return !!deletedCountry;
 };
 
-export const getAll = async (filters?: GetAllCountriesFilters): Promise<CountryOutput[]> => {
+export const getAll = async (
+  filters?: GetAllCountriesFilters,
+): Promise<CountryOutput[]> => {
   const countries = await Country.findAll({
     where: {
       ...(filters?.isDeleted && { deletedAt: { [Op.not]: null } }),
+      ...(filters?.name && { name: { [Op.iLike]: `%${filters.name}%` } }),
     },
     ...((filters?.isDeleted || filters?.includeDeleted) && { paranoid: true }),
   });
 
-  if(!countries) {
+  if (!countries) {
     throw new CustomError('No conuntries found', 404);
   }
-  
+
   return countries.map((country) => country.toJSON()) as CountryOutput[];
 };
