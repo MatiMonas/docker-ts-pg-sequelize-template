@@ -7,13 +7,7 @@ const { FORCE_SYNC_DB } = process.env;
 export const connectToDB = async () => {
   const force = FORCE_SYNC_DB === 'true';
 
-  await sequelize.sync({ force }).then(async (res) => {
+  await sequelize.sync({ force }).then(async () => {
     console.log('DB Synced');
-    const country = await Country.create({ name: 'India' });
-    const user =await  User.create({
-      name: 'John Doe',
-      email: 'mail@mail.com',
-      countryId: 1,
-    });
   });
 };
