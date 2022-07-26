@@ -1,5 +1,7 @@
 # docker-ts-pg-sequelize-template
 
+> The template is still under construction
+
 To make use of this template follow the steps below: 
 1. Create an .env file following the .env.example
 2. Open Docker Desktop
