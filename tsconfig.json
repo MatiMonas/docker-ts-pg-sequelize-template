@@ -13,13 +13,12 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    
   },
   "include": [
     "typings.d.ts",
-    "./src/**/*"
+    "./src/**/*",
+    "tests"
   ],
-  
   "exclude": [
     "./node_modules"
   ],
