@@ -9,7 +9,7 @@ interface UserAttributes {
   countryId: number;
   createdAt?: Date;
   updatedAt?: Date;
-  deltedAt?: Date;
+  deletedAt?: Date;
 }
 
 export interface UserInput extends Optional<UserAttributes, 'id'> {}

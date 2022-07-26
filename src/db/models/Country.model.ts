@@ -7,7 +7,7 @@ interface CountryAttributes {
   name: string;
   createdAt?: Date;
   updatedAt?: Date;
-  deltedAt?: Date;
+  deletedAt?: Date;
 }
 
 export interface CountryInput extends Optional<CountryAttributes, 'id'> {}
