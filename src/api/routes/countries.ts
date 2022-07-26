@@ -61,6 +61,16 @@ const countryRouter = Router()
 
   .delete('/:id', async (req: Request, res: Response) => {
     // todo
+    try {
+      const id: number = Number(req.params.id);
+      const result = await countriesController.deleteById(id);
+
+      return res.status(200).json(result);
+    } catch (err: any) {
+      return res
+        .status(err.status)
+        .json({ message: err.message, status: err.status });
+    }
   });
 
 export default countryRouter;
