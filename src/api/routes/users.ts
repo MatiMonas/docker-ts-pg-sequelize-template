@@ -34,7 +34,8 @@ const userRouter = Router()
   .post('/', async (req: Request, res: Response, next: NextFunction) => {
     try {
       const user: CreateUserDTO = req.body;
-      const results = await usersController.create(user);
+
+     const results = await usersController.create(user);
 
       return res.status(200).json(results);
     } catch (err: any) {

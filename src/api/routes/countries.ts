@@ -38,9 +38,7 @@ const countryRouter = Router()
 
       return res.status(200).json(results);
     } catch (err: any) {
-      return res
-        .status(err.status)
-        .json({ message: err.message, status: err.status });
+       next(err);
     }
   })
 

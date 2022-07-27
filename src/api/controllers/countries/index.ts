@@ -1,4 +1,4 @@
-import { CountryOutput } from '../../../db/models/Country.model';
+import { CountryOutput } from '../../../db/models/Country';
 import * as countryService from '../../../db/services/CountryService';
 import {
   CreateCountryDTO,

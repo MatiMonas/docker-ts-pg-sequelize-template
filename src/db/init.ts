@@ -1,13 +1,12 @@
-import { sequelize } from './models';
-import Country from './models/Country.model';
-import User from './models/Users.model';
+import sequelize from "./config";
 
-const { FORCE_SYNC_DB } = process.env;
 
-export const connectToDB = async () => {
-  const force = FORCE_SYNC_DB === 'true';
+const isDev = process.env.NODE_ENV === 'development';
 
-  await sequelize.sync({ force }).then(async () => {
-    console.log('DB Synced');
-  });
-};
+
+
+const dbInit = async () => {
+  await sequelize.sync({ force: false });
+}
+
+export default dbInit;

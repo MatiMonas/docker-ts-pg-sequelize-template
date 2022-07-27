@@ -5,6 +5,8 @@ import { User } from '../../interfaces';
 import * as mapper from './mapper';
 
 export const create = async (payload: CreateUserDTO): Promise<User> => {
+  console.log('controller', payload);
+  
   return mapper.toUser(await userService.create(payload));
 };
 
@@ -15,8 +17,14 @@ export const update = async (
   return mapper.toUser(await userService.update(id, payload));
 };
 
-export const getById = async (id: number): Promise<User> => {
-  return mapper.toUser(await userService.getById(id));
+export const getById = async (id: number): Promise<any> => {
+  try {
+    
+    return mapper.toUser(await userService.getById(id));
+  } catch (error) {
+    console.log(error);
+    
+  }
 };
 
 export const deleteById = async (id: number): Promise<Boolean> => {

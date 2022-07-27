@@ -1,5 +1,5 @@
 import { Country } from "../../interfaces";
-import { CountryOutput } from "../../../db/models/Country.model";
+import { CountryOutput } from "../../../db/models/Country";
 
 export const toCountry = (country: CountryOutput): Country => {
   return {

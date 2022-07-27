@@ -4,7 +4,7 @@ import { errorHandler } from './api/middlewares/errorHandler';
 import morgan from 'morgan';
 import cors from 'cors';
 import routes from './api/routes';
-import { connectToDB } from './db/init';
+import dbInit from './db/init';
 
 const port: number = Number(process.env.PORT) || 3001;
 
@@ -30,7 +30,7 @@ const main = () => {
   const app = getApplication();
   try {
     app.listen(port, async () => {
-      await connectToDB().then(() =>
+      await dbInit().then(() =>
         console.log(`Server running on http://localhost:${port}`),
       );
     });

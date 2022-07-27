@@ -1,7 +1,7 @@
 import { Op } from 'sequelize';
 import { CustomError } from '../../common/errors';
-import Country from '../models/Country.model';
-import { CountryInput, CountryOutput } from '../models/Country.model';
+import Country from '../models/Country';
+import { CountryInput, CountryOutput } from '../models/Country';
 import { GetAllCountriesFilters } from './types';
 
 export const create = async (payload: CountryInput): Promise<CountryOutput> => {

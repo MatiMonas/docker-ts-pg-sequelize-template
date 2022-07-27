@@ -1,5 +1,5 @@
 import { GetAllCountriesFilters } from '../dal/types';
-import { CountryOutput, CountryInput } from '../models/Country.model';
+import { CountryOutput, CountryInput } from '../models/Country';
 import * as countryDal from '../dal/country';
 
 export const create = (payload: CountryInput): Promise<CountryOutput> => {
