@@ -7,6 +7,7 @@ export interface GetAllCountriesFilters extends ListFilters{
   name?: string;
 }
 export interface GetAllUsersFilters extends ListFilters{
-  countryId?: number;
+  userId?: number;
   email?: string
+  name?: string;
 }
