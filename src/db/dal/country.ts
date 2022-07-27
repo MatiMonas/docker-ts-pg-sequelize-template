@@ -22,15 +22,19 @@ export const create = async (payload: CountryInput): Promise<CountryOutput> => {
   return country.toJSON() as CountryOutput;
 };
 
-export const findOrCreate = async (
-  payload: CountryInput,
-): Promise<CountryOutput> => {
-  const [country] = await Country.findOrCreate({
-    where: {
-      name: payload.name,
-    },
-  });
-  return country.toJSON() as CountryOutput;
+export const bulkCreate = async (
+  payload: Array<CountryInput>,
+): Promise<CountryOutput[] | void> => {
+  try {
+    let countries = await Country.bulkCreate(payload);
+    const results = countries.map(
+      (country) => country.toJSON() as CountryOutput,
+    );
+
+    return results;
+  } catch (error:any) {
+    throw new CustomError(error.message, 400);
+  }
 };
 
 export const update = async (

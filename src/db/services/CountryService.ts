@@ -6,6 +6,12 @@ export const create = (payload: CountryInput): Promise<CountryOutput> => {
   return countryDal.create(payload);
 };
 
+export const bulkCreate = (
+  payload: CountryInput[],
+): Promise<CountryOutput | any> => {
+  return countryDal.bulkCreate(payload);
+};
+
 export const update = (
   id: number,
   payload: Partial<CountryInput>,

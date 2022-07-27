@@ -44,6 +44,22 @@ const countryRouter = Router()
     }
   })
 
+  .post(
+    '/bulkCreate',
+    async (req: Request, res: Response, next: NextFunction) => {
+      try {
+        const country: CreateCountryDTO[] = req.body;
+        const results = await countriesController.bulkCreate(country);
+
+        return res.status(200).json(results);
+      } catch (err: any) {
+        return res
+          .status(err.status)
+          .json({ message: err.message, status: err.status });
+      }
+    },
+  )
+
   .patch('/:id', async (req: Request, res: Response) => {
     // todo
     try {
