@@ -1,6 +1,7 @@
 import { Op } from 'sequelize';
 import User, { UserInput, UserOutput } from '../models/Users.model';
 import { GetAllUsersFilters } from './types';
+import { CustomError } from '../../common/errors';
 
 export const create = async (payload: UserInput): Promise<UserOutput> => {
   const user = await User.create(payload);
@@ -15,7 +16,7 @@ export const findOrCreate = async (payload: UserInput): Promise<UserOutput> => {
   });
 
   if (created) {
-    throw new Error('User with that email already exists');
+    throw new CustomError('User with that email already exists', 400);
   }
 
   return user.toJSON() as UserOutput;
@@ -31,6 +32,18 @@ export const update = async (
     throw new Error('User not found');
   }
 
+  const checkUser = await User.findOne({
+    where: {
+      email: {
+        [Op.eq]: payload.email,
+      },
+    },
+  });
+
+  if (checkUser) {
+    throw new CustomError('User with that email already exists', 400);
+  }
+
   const updatedUser = await user.update(payload);
   return updatedUser.toJSON() as UserOutput;
 };
@@ -39,7 +52,7 @@ export const getById = async (id: number): Promise<UserOutput> => {
   const user = await User.findByPk(id);
 
   if (!user) {
-    throw new Error('User not found');
+    throw new CustomError('User not found', 404);
   }
   return user.toJSON() as UserOutput;
 };
@@ -55,13 +68,18 @@ export const deleteById = async (id: number): Promise<boolean> => {
 export const getAll = async (
   filters?: GetAllUsersFilters,
 ): Promise<UserOutput[]> => {
-  const countries = await User.findAll({
+  const users = await User.findAll({
     where: {
       ...(filters?.isDeleted && { deletedAt: { [Op.not]: null } }),
-      ...(filters?.countryId && { countryId: filters.countryId }),
+      ...(filters?.userId && { userId: filters.userId }),
       ...(filters?.email && { email: filters.email }),
+      ...(filters?.name && { name: filters.name }),
     },
   });
 
-  return countries.map((user) => user.toJSON()) as UserOutput[];
+  if (!users.length) {
+    throw new CustomError('User/s not found', 404);
+  }
+
+  return users.map((user) => user.toJSON()) as UserOutput[];
 };
