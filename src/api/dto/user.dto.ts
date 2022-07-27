@@ -1,4 +1,5 @@
 import { Optional } from "sequelize/types";
+import { User } from "../interfaces";
 
 interface ListProperties {
   name: string;
@@ -6,7 +7,7 @@ interface ListProperties {
   countryId: number;
 }
  
-export type UpdateUserDTO = Optional<ListProperties, 'name' | 'countryId' | 'email' >
+export type UpdateUserDTO = ListProperties & Partial<Optional<User, "id">>;
 export type CreateUserDTO = ListProperties;
 
 export type FilterUsersDTO = {
